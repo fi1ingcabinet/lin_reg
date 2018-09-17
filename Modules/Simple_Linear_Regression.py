@@ -43,6 +43,7 @@ def lin_reg_line():
     print(regr.coef_, regr.intercept_)
 
     plt.plot(numbers1,regr.coef_[0][0]*numbers1+regr.intercept_[0])
+    print("poo")
 
 if __name__=='__main__':
     #plot()
