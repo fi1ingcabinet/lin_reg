@@ -32,7 +32,18 @@ def plot():
     plt.show()
 
 def lin_reg_line():
-    print('poo')
+    path=input("enter path")
+    numbers1=np.asanyarray(read_column_csv(path,4))
+    numbers1=numbers1.reshape(-1, 1)
+    numbers2=np.asanyarray(read_column_csv(path,12))
+    numbers2=numbers2.reshape(-1, 1)
+    
+    regr=lm.LinearRegression()
+    regr.fit(numbers1,numbers2)
+    print(regr.coef_, regr.intercept_)
+
+    plt.plot(numbers1,regr.coef_[0][0]*numbers1+regr.intercept_[0])
 
 if __name__=='__main__':
-    plot()
+    #plot()
+    lin_reg_line()
