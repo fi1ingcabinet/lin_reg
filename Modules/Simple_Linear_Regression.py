@@ -120,6 +120,9 @@ def sklearn_r_squared():
     y_pred=y_pred.reshape(-1, 1)
     r_sq=explained_variance_score(y_pred, numbers2[0:])
     print(r_sq)
+
+def manual_r_squared():
+    manual_variance()
     
     
     
