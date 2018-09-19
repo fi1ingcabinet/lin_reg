@@ -11,8 +11,13 @@ def choice():
     print("1. Linear Regression")
 
 def Linear_Regression():
-    print("1. Plot")
-    print("2. line values")
+    print("1. input csv plot")
+    print("2. Lin reg line sklearn input csv")
+    print("3. Manual lin reg line input csv")
+    print("4. numpy variance")
+    print("5. manual variance")
+    print("6. sklearn r squared")
+    print("7. manual r squared")
 
 
 if __name__=='__main__':
@@ -23,8 +28,23 @@ if __name__=='__main__':
             Linear_Regression()
             b=input()
             if b=='1':
-                Simple_Linear_Regression.plot()
+                x,y=Simple_Linear_Regression.pick_columns_as_list()
+                Simple_Linear_Regression.plot(x,y)
             if b=='2':
-                Simple_Linear_Regression.lin_reg_line()
-            if b=='2':
-                print("test")
+                x,y=Simple_Linear_Regression.pick_columns_as_list()
+                Simple_Linear_Regression.lin_reg_line(x,y)
+            if b=='3':
+                x,y=Simple_Linear_Regression.pick_columns_as_list()
+                Simple_Linear_Regression.manual_lin_reg_line(x,y)
+            if b=='4':
+                x,y=Simple_Linear_Regression.pick_columns_as_list()
+                Simple_Linear_Regression.np_variance(x,y)
+            if b=='5':
+                x,y=Simple_Linear_Regression.pick_columns_as_list()
+                Simple_Linear_Regression.manual_variance(x,y)
+            if b=='6':
+                x,y=Simple_Linear_Regression.pick_columns_as_list()
+                Simple_Linear_Regression.sklearn_r_squared(x,y)
+            if b=='7':
+                x,y=Simple_Linear_Regression.pick_columns_as_list()
+                Simple_Linear_Regression.manual_r_squared(x,y)
