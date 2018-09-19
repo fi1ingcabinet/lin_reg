@@ -2,6 +2,8 @@
 Created on 15 Sep 2018
 
 @author: root
+
+home/marion/Desktop/Random/Test_data1.csv
 '''
 
 import csv
