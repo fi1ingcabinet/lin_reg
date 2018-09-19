@@ -26,3 +26,5 @@ if __name__=='__main__':
                 Simple_Linear_Regression.plot()
             if b=='2':
                 Simple_Linear_Regression.lin_reg_line()
+            if b=='2':
+                print("test")
