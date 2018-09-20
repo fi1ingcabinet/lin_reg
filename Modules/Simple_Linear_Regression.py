@@ -96,7 +96,7 @@ def np_variance(x,y):
     numbers2=numbers2.reshape(-1, 1)
     
     variance=np.var(numbers2[0:])
-    #print(variance)
+    print(variance)
     return variance
 
 def manual_variance(x,y):
@@ -116,7 +116,7 @@ def manual_variance(x,y):
         sum_x_minus_mu=sum_x_minus_mu+(numbers2[i-1:i]-mu)**2
     
     var=sum_x_minus_mu/len(numbers2)    
-    #print(var)
+    print(var)
     return var
     
 def sklearn_r_squared(x,y):
@@ -149,6 +149,7 @@ def manual_r_squared(x,y):
     y_pred=[]
     for i in range(1,len(numbers2)+1):
         y_pred.append(regr.coef_*numbers2[i-1:i]+regr.intercept_)
+    print(y_pred)
     
     y_diff=[]
     for i in range(1,len(numbers2)+1):
@@ -159,9 +160,9 @@ def manual_r_squared(x,y):
     manual_r_2=(np_variance(x,y)-np_variance(x, y_diff))/np_variance(x,y)
     manual_r=manual_r_2**2
     man_3=np_variance(x,y_pred)/np_variance(x, y)
+    man_3b=np.var(y_diff)
     man_4=np.var(y_pred)/np.var(y)
-    man5=regr.coef_**2*np.var(x)/np.var(y)
-    print(manual_r_2,manual_r,man_3,man_4,man5)
+    print(manual_r_2,manual_r,man_3,man_4,man_3b)
     
     
 if __name__=='__main__':
