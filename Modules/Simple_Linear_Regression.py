@@ -36,16 +36,10 @@ def pick_columns_as_list():
     return numbers1, numbers2
 
 def plot(x, y):
-    numbers1=np.asanyarray(x)
-    numbers1=numbers1.reshape(-1, 1)
-    #print(numbers1)
-    numbers2=np.asanyarray(y)
-    numbers2=numbers2.reshape(-1, 1)
-    #print(numbers2)
 
-    plt.xticks(np.arange(0,len(x),step=len(x)/10+1)) 
-    plt.yticks(np.arange(0,len(y),step=len(y)/10+1))    
-    plt.scatter(numbers1[0:],numbers2[0:])
+    #plt.xticks(np.arange(0,len(x),step=len(x)/10+1)) 
+    #plt.yticks(np.arange(0,len(y),step=len(y)/10+1))    
+    plt.scatter(x,y)
     plt.show()
 
 def lin_reg_line(x,y):
@@ -54,7 +48,7 @@ def lin_reg_line(x,y):
     #print(numbers1)
     numbers2=np.asanyarray(y)
     numbers2=numbers2.reshape(-1, 1)
-    
+
     regr=lm.LinearRegression()
     regr.fit(numbers1,numbers2)
     print(regr.coef_, regr.intercept_)
@@ -89,11 +83,13 @@ def manual_lin_reg_line(x,y):
     print(a,b)
 
 def np_variance(x,y):
+    #print(x,y)
     numbers1=np.asanyarray(x)
     numbers1=numbers1.reshape(-1, 1)
     #print(numbers1)
     numbers2=np.asanyarray(y)
     numbers2=numbers2.reshape(-1, 1)
+    #print(numbers1, numbers2)
     
     variance=np.var(numbers2[0:])
     print(variance)
@@ -128,10 +124,13 @@ def sklearn_r_squared(x,y):
     
     regr=lm.LinearRegression()
     regr.fit(numbers1,numbers2)
+    coef=float(regr.coef_[0][0])
+    intercept=float(regr.intercept_[0])
     
     y_pred=[]
-    for i in range(1,len(numbers2)+1):
-        y_pred.append(regr.coef_*numbers2[i-1:i]+regr.intercept_)
+    for i in x:
+        y_pred.append(coef*i+intercept)
+        #print(y_pred)
     y_pred=np.asanyarray(y_pred)
     y_pred=y_pred.reshape(-1, 1)
     r_sq=r2_score(numbers2[0:],y_pred)
@@ -146,32 +145,31 @@ def manual_r_squared(x,y):
     
     regr=lm.LinearRegression()
     regr.fit(numbers1,numbers2)
+    coef=float(regr.coef_[0][0])
+    intercept=float(regr.intercept_[0])
+    
     y_pred=[]
-    for i in range(1,len(numbers2)+1):
-        y_pred.append(regr.coef_*numbers2[i-1:i]+regr.intercept_)
-    print(y_pred)
+    for i in x:
+        y_pred.append(coef*i+intercept)
+        #print(y_pred)
+    #print(y_pred)
     
     y_diff=[]
-    for i in range(1,len(numbers2)+1):
-        y_diff.append((numbers2[i-1:i]-y_pred[i-1]))
+    for i in range(0,len(y)):
+        y_diff.append(y[i]-y_pred[i])
     
-    #print(manual_variance(x,y),manual_variance(x, y_diff))
+    #print(y_diff)
     
-    manual_r_2=(np_variance(x,y)-np_variance(x, y_diff))/np_variance(x,y)
-    manual_r=manual_r_2**2
-    man_3=np_variance(x,y_pred)/np_variance(x, y)
-    man_3b=np.var(y_diff)
-    man_4=np.var(y_pred)/np.var(y)
-    print(manual_r_2,manual_r,man_3,man_4,man_3b)
-    
+    man_r_2=(manual_variance(x,y)-manual_variance(x, y_diff))/manual_variance(x, y)
+    print(man_r_2)
     
 if __name__=='__main__':
     x,y=pick_columns_as_list()
     #plot()
     #lin_reg_line()
     #manual_lin_reg_line()
-    #np_variance()
-    #manual_variance()
+    #np_variance(x,y)
+    #manual_variance(x,y)
     sklearn_r_squared(x,y)
     manual_r_squared(x,y)
     
